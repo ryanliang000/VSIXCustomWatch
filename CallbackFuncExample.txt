@@ -1,0 +1,7 @@
+extern "C"
+{
+	__declspec(dllexport) char* showInfo(uintptr_t pAddress, char pTypes[])
+	{
+		return "callback function return contents";
+	};
+};
