@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="VSIXCutomWatch.43c4e7e9-b296-4b30-9345-37ed7196f6ad" Version="1.0" Language="en-US" Publisher="Microsoft" />
     <DisplayName>VSIXCutomWatch</DisplayName>
-    <Description>Empty VSIX Project.</Description>
+    <Description>Custom Debug Watch</Description>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0]" />
