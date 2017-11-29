@@ -112,10 +112,10 @@ namespace VSIXCutomWatch
             if (m_dte.Windows == null)
                 return;
 
+            Window wind = (Window)m_dte.Windows.Item(EnvDTE.Constants.vsWindowKindOutput);
+            wind.Visible = true;
             if (m_watchPlane == null)
             {
-                Window wind = (Window)m_dte.Windows.Item(EnvDTE.Constants.vsWindowKindOutput);
-                wind.Visible = true;
                 OutputWindow outputWind = (OutputWindow)wind.Object;
                 m_watchPlane = outputWind.OutputWindowPanes.Add("Custom Watch");
             }
