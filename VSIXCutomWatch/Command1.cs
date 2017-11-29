@@ -32,7 +32,7 @@ namespace VSIXCutomWatch
         public MenuCommand m_menuCommandConfig = null;
         public DTE m_dte = null;
         public ProcEvent m_procEvent = null;
-        OutputWindowPane m_watchPlane = null;
+        OutputWindowPane m_watchPane = null;
 
 
         public bool MenuEnabled
@@ -114,13 +114,13 @@ namespace VSIXCutomWatch
 
             Window wind = (Window)m_dte.Windows.Item(EnvDTE.Constants.vsWindowKindOutput);
             wind.Visible = true;
-            if (m_watchPlane == null)
+            if (m_watchPane == null)
             {
                 OutputWindow outputWind = (OutputWindow)wind.Object;
-                m_watchPlane = outputWind.OutputWindowPanes.Add("Custom Watch");
+                m_watchPane = outputWind.OutputWindowPanes.Add("Custom Watch");
             }
-            m_watchPlane.Activate();
-            m_watchPlane.OutputString(str + "\n");
+            m_watchPane.Activate();
+            m_watchPane.OutputString(str + "\n");
         }
 
         /// <summary>
@@ -179,16 +179,15 @@ namespace VSIXCutomWatch
                 }
                 ptRight.CharLeft();
                 strSelectText = ptLeft.GetText(ptRight);
+                if (!IsValidStartCharOfName(strSelectText[0]))
+                   return;
             }
             if (strSelectText.Length == 0)
                 return;
 
-            if (!IsValidStartCharOfName(strSelectText[0]))
-                return;
-
-            if (m_watchPlane != null)
+            if (m_watchPane != null)
             {
-                m_watchPlane.Clear();
+                m_watchPane.Clear();
             }
 
             string strRetValue = "";
