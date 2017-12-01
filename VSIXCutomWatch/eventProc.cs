@@ -112,6 +112,11 @@ namespace VSIXCutomWatch
                 {
                     strValue = strValue.Substring(0, nPos).Trim();
                 }
+                nPos = strValue.IndexOf('<');
+                if (nPos > 0)
+                {
+                    strValue = strValue.Substring(0, nPos).Trim();
+                }
                 nPos = strType.IndexOf('{');
                 if (nPos > 0)
                 {
@@ -156,7 +161,7 @@ namespace VSIXCutomWatch
             strRetValue = "";
 
             string strNewExpr = string.Format("{{,,{0}}}{1}({2}, \"{3}\")", dllName, funcName, address, type);
-
+            //m_watch.OutputStr(strNewExpr);
             try
             {
                 Debugger debugger = m_watch.m_dte.Debugger;

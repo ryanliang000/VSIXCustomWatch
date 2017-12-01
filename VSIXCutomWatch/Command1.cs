@@ -200,6 +200,7 @@ namespace VSIXCutomWatch
                     OutputStr("(Inform: Already copy the data below to clipborad)");
                 }
                 OutputStr(strRetValue);
+                OutputStr("\n");
             }
             else
             {
