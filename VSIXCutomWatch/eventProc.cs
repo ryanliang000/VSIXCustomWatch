@@ -10,7 +10,8 @@ namespace VSIXCutomWatch
     {
         protected EnvDTE.DebuggerEvents m_debugEvents = null;
         protected CommandCustomWatch m_watch = null;
-        public const int s_nMaxReadBufLength = 0x4FFFFFF;
+        //  The Microsoft implementation will fail any request for more than 25 MBs of string memory.
+        public const int s_nMaxReadBufLength = 0x18FFFFF;
         public const int s_nTimeOutMiliSecond = 3500;
 
 
@@ -71,7 +72,7 @@ namespace VSIXCutomWatch
                         return false;
                     }
                 }
-                else if (strOldType.IndexOf("auto_ptr") != -1 || strOldType.IndexOf("shared_ptr") != -1)
+                else if (strOldType.IndexOf("auto_ptr") != -1)
                 {
                     exp = debugger.GetExpression(exp.Name + "._Myptr", false, s_nTimeOutMiliSecond);
                     if (!exp.IsValidValue)
@@ -80,7 +81,7 @@ namespace VSIXCutomWatch
                         return false;
                     }
                 }
-                else if (strOldType.IndexOf("RefPtr") != -1)
+                else if (strOldType.IndexOf("RefPtr") != -1 || strOldType.IndexOf("shared_ptr") != -1)
                 {
                     exp = debugger.GetExpression(exp.Name + "._ptr", false, s_nTimeOutMiliSecond);
                     if (!exp.IsValidValue)
@@ -149,7 +150,7 @@ namespace VSIXCutomWatch
             {
                 m_watch.OutputStr("Callback Dll: <" + dllName + ">");
                 m_watch.OutputStr("Callback Function: <" + funcName + ">");
-                strErrorMsg = "Config Error, please using Alt+3 change the config!";
+                strErrorMsg = "Config Error, please using \"tools->AsString Config\" to modify config!";
                 return false;
             }
             return CalcCustomWatch(dllName, funcName, address, type, out strErrorMsg, out strRetValue);
