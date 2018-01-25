@@ -10,8 +10,8 @@ namespace VSIXCutomWatch
     {
         protected EnvDTE.DebuggerEvents m_debugEvents = null;
         protected CommandCustomWatch m_watch = null;
-        public const int s_nMaxReadBufLength = 2048000;
-        public const int s_nTimeOutMiliSecond = 2500;
+        public const int s_nMaxReadBufLength = 0x4FFFFFF;
+        public const int s_nTimeOutMiliSecond = 3500;
 
 
         public ProcEvent(CommandCustomWatch watch) 
